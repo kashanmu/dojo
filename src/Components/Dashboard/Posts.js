@@ -47,7 +47,7 @@ render(){
             return <h1>Error</h1>
         }
     }
-
+ //sdfs
     getPost = () => {
            Axios.get(" http://54.245.42.196/posts/"+this.props.userid , 
        {headers: {Authorization:localStorage.getItem("jw-token")} },

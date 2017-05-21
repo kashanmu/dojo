@@ -7,7 +7,7 @@ class Dashboard extends Component {
       constructor(props){
         super(props);
      }
-
+// testing
      logOut = ()=> {
          console.log ("You are in Logout action");
         localStorage.setItem("jw-token", "");
@@ -15,7 +15,7 @@ class Dashboard extends Component {
         localStorage.setItem("user","")
         this.props.history.push("/login");
     }
-
+//test2
   render() {
       return(
           <div className="container">

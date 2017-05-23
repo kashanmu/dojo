@@ -25,7 +25,7 @@ render(){
 
                return (
                 <div>
-                              <div padding="5px" className="container">
+                              <div className="container">
                     <form onSubmit={this.registerpost}>
                         <label>New Post</label>
                         <textarea 

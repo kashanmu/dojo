@@ -23,7 +23,6 @@ class Login extends Component {
         }).then((result) => {
             console.log(result.data);
             localStorage.setItem("jw-token", result.data.token);
-            localStorage.setItem("username", this.state.username);
             this.props.history.push(`/dashboard/${result.data.user_id}`);
         }).catch((err) => {
            console.log("Validation Errors,", err.response.data);

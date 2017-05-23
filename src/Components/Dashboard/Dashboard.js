@@ -7,7 +7,7 @@ class Dashboard extends Component {
       constructor(props){
         super(props);
      }
-// testing
+
      logOut = ()=> {
          console.log ("You are in Logout action");
         localStorage.setItem("jw-token", "");
@@ -15,22 +15,52 @@ class Dashboard extends Component {
         localStorage.setItem("user","")
         this.props.history.push("/login");
     }
-//test2
+
+   authenticate = () => {
+           Axios.get(" http://54.245.42.196/users/"+this.props.match.params.userid+"/authenticate" , 
+       {headers: {Authorization:localStorage.getItem("jw-token")} },
+       {
+           // cancelToken: this.cancelToken.token
+        }).then((result) => {
+            localStorage.setItem("authenticateduser",result.data.user._id)
+            localStorage.setItem("username", result.data.user.username);
+           // return result.data.user._id;
+            //console.log(result.data.user);
+         }).catch((err) => {
+            localStorage.setItem("authenticateduser","false");
+        })
+
+     }
+
   render() {
-      return(
-          <div className="container">
-              <div className="row">
-                  <div className="col-sm-10"><h1>The Wall Example </h1></div>
-                  <div className="col-sm-2"> <input type="button" className="btn btn-primary" value="Logout" onClick={this.logOut} /> </div>
-              </div>
-              <hr />
-              <div className="row">
-                  <h2> Welcome {localStorage.getItem("username")} {console.log(this.props.match.params.userid)}</h2>
-              </div>
-              <div className="wallheading"> The Wall</div>
-              <div className="row"> <Posts userid={this.props.match.params.userid}/> </div>
-          </div>
-      )
+        this.authenticate();
+        console.log(localStorage.getItem("authenticateduser")+":"+this.props.match.params.userid)
+         if (localStorage.getItem("authenticateduser") === this.props.match.params.userid) {
+ 
+         
+            return(
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-10"><h1>The Wall Example </h1></div>
+                        <div className="col-sm-2"> <input type="button" className="btn btn-primary" value="Logout" onClick={this.logOut} /> </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <h2> Welcome {localStorage.getItem("username")} </h2>
+                    </div>
+                    <div className="wallheading"> The Wall</div>
+                    <div className="row"> <Posts userid={this.props.match.params.userid}/> </div>
+                </div>
+            )
+        }
+        
+        else {
+            return(
+                <div>
+                  {this.logOut()}
+                 </div>
+            )
+        } 
   }
   }
 

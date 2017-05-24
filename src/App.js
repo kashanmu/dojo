@@ -11,16 +11,16 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Header />
+          <Route path="/" component={Header} />
           <Route exact path="/" component={Login} />
-          <Route path="/post" component={Post} />
-          <Route path="/login" component={Login} />
-           <Route path="/dashboard/:userid" component={Dashboard} />
+          <Route exact path="/post" component={Post} />
+          <Route exact path="/login" component={Login} />
+           <Route exact path="/dashboard/:userid" component={Dashboard} />
 
         </div>
       </BrowserRouter>
     );
   }
-}
+} 
 
 export default App
